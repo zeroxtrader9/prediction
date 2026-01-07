@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pro Prediction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #111;
+  color: #f5c542;
+}
+
+.header img {
+  width: 42px;
+  height: 42px;
+}
+
+/* MAIN CARD */
+.card {
+  max-width: 350px;
+  margin: 20px auto;
+  background: #e6e6e6;
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.card h2 {
+  margin: 10px 0 5px;
+}
+
+.prediction {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* USER INFO */
+.info {
+  color: #555;
+  font-size: 14px;
+}
+
+/* ADMIN PANEL */
+.admin-box {
+  display: none;
+  max-width: 350px;
+  margin: 20px auto;
+  background: #111;
+  color: white;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.admin-box h3 {
+  margin-top: 0;
+  color: #f5c542;
+}
+
+.admin-buttons button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-dragon { background: #2ecc71; color: #000; }
+.btn-tiger { background: #3498db; color: #000; }
+.btn-auto { background: #f39c12; color: #000; }
+
+/* ADMIN LOGIN */
+.admin-login {
+  max-width: 350px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.admin-login input {
+  width: 70%;
+  padding: 8px;
+}
+
+.admin-login button {
+  padding: 8px 12px;
+  margin-left: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="icon-192.png">
+  <h2>PRO PREDICTION</h2>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+  <div class="info">Next Prediction</div>
+  <div class="prediction" id="prediction">WAIT</div>
+  <div class="info" id="time">Updated manually</div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="admin-login" id="loginBox">
+  <input type="password" id="adminPass" placeholder="Admin password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-box" id="adminPanel">
+  <h3>Admin Panel</h3>
+  <div class="admin-buttons">
+    <button class="btn-dragon" onclick="setPrediction('DRAGON')">DRAGON</button>
+    <button class="btn-tiger" onclick="setPrediction('TIGER')">TIGER</button>
+    <button class="btn-auto" onclick="setPrediction('AUTO')">AUTO</button>
+  </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "1234"; // 🔴 change this
+
+function login() {
+  const pass = document.getElementById("adminPass").value;
+  if (pass === ADMIN_PASSWORD) {
+    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("loginBox").style.display = "none";
+  } else {
+    alert("Wrong password");
+  }
+}
+
+function setPrediction(value) {
+  document.getElementById("prediction").innerText = value;
+  document.getElementById("time").innerText =
+    "Updated: " + new Date().toLocaleTimeString();
+}
+</script>
+
+</body>
+</html>
