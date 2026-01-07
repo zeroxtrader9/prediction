@@ -6,136 +6,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #020024, #090979, #00d4ff);
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#020024,#090979,#00d4ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
 }
-
-.main {
-  width: 90%;
-  max-width: 380px;
-  text-align: center;
-  background: rgba(0,0,0,0.4);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 0 40px rgba(0,255,255,0.5);
-  animation: fadeIn 1.5s ease;
+.app{
+  width:92%;
+  max-width:380px;
+  background:rgba(0,0,0,.45);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 0 35px rgba(0,255,255,.45);
+  text-align:center;
 }
-
-@keyframes fadeIn {
-  from {opacity:0; transform: scale(0.9);}
-  to {opacity:1; transform: scale(1);}
+h1{margin:8px 0 16px; letter-spacing:1px}
+.card{
+  background:rgba(255,255,255,.1);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 0 20px cyan;
+  animation:glow 2s infinite alternate;
 }
-
-.logo {
-  width: 120px;
-  border-radius: 50%;
-  box-shadow: 0 0 20px cyan;
-  margin-bottom: 15px;
+@keyframes glow{from{box-shadow:0 0 10px cyan}to{box-shadow:0 0 28px cyan}}
+.label{opacity:.8}
+#result{font-size:44px; margin:10px 0}
+.timer{opacity:.9}
+.btn{
+  display:block;
+  margin:12px auto;
+  padding:14px;
+  width:100%;
+  border:none;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+.download{background:#00c853;color:#000}
+.telegram{background:#0088cc;color:#fff}
+.admin{
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px dashed rgba(255,255,255,.3);
 }
-
-.card {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px 0;
-  animation: glow 2s infinite alternate;
+.admin button{
+  margin:6px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+  background:#ff9800;
+  color:#000;
 }
-
-@keyframes glow {
-  from { box-shadow: 0 0 10px cyan; }
-  to { box-shadow: 0 0 30px cyan; }
-}
-
-.prediction {
-  font-size: 42px;
-  font-weight: bold;
-}
-
-.time {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-top: 10px;
-}
-
-.btn {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-  padding: 14px;
-  border-radius: 12px;
-  margin: 12px 0;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px cyan;
-}
-
-.footer {
-  font-size: 12px;
-  opacity: 0.6;
-  margin-top: 10px;
-}
+.note{font-size:12px;opacity:.6;margin-top:8px}
 </style>
 </head>
 
 <body>
-
-<div class="main">
-
-  <!-- LOGO IMAGE -->
-  <!-- image ka naam: logo.png (same repo me upload karna) -->
-  <img src="logo.png" class="logo">
-
+<div class="app">
   <h1>🔥 PRO PREDICTION 🔥</h1>
 
   <div class="card">
-    <div>Next Prediction</div>
-    <div class="prediction">DRAGON</div>
-    <div class="time" id="time"></div>
+    <div class="label">Next Prediction</div>
+    <div id="result">DRAGON</div>
+    <div class="timer">⏱ Next in <span id="time">15</span>s</div>
   </div>
 
-  <!-- DOWNLOAD / GAME LINK -->
-  <a class="btn" href="https://rummygemsvip.in/?from_gameid=30549885&channelCode=30549626" target="_blank">
-    ⬇️ Download Game
+  <a class="btn download" target="_blank"
+     href="https://rummygemsvip.in/?from_gameid=30549885&channelCode=30549626">
+     ⬇️ Download Game
   </a>
 
-  <!-- TELEGRAM LINK -->
-  <a class="btn" href="https://t.me/zeroxprediction1" target="_blank">
-    📢 Join Telegram
+  <a class="btn telegram" target="_blank"
+     href="https://t.me/zeroxprediction1">
+     📢 Join Telegram
   </a>
 
-  <div class="footer">
-    © 2026 Pro Prediction | All Rights Reserved
+  <!-- ADMIN PANEL (demo) -->
+  <div class="admin">
+    <button onclick="setResult('DRAGON')">ADMIN: DRAGON</button>
+    <button onclick="setResult('TIGER')">ADMIN: TIGER</button>
+    <button onclick="toggleAuto()">AUTO ON / OFF</button>
+    <div class="note">Admin access = password protected (demo)</div>
   </div>
-
 </div>
 
 <script>
-function updateTime() {
-  const now = new Date();
-  document.getElementById("time").innerText =
-    "⏰ " + now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
-updateTime();
-</script>
+let time = 15;
+let auto = true;
+const options = ["DRAGON","TIGER"];
+const ADMIN_PASS = "1234"; // change if needed
 
+const res = document.getElementById("result");
+const tbox = document.getElementById("time");
+
+function askPass(){
+  const p = prompt("Enter Admin Password");
+  return p === ADMIN_PASS;
+}
+function setResult(v){
+  if(!askPass()) return alert("Wrong password");
+  res.innerText = v;
+  time = 15;
+}
+function toggleAuto(){
+  if(!askPass()) return alert("Wrong password");
+  auto = !auto;
+  alert("Auto mode: " + (auto ? "ON":"OFF"));
+}
+function autoPick(){
+  const r = Math.floor(Math.random()*options.length);
+  res.innerText = options[r];
+}
+setInterval(()=>{
+  time--;
+  tbox.innerText = time;
+  if(time<=0){
+    if(auto) autoPick();
+    time = 15;
+  }
+},1000);
+</script>
 </body>
 </html>
