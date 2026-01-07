@@ -7,6 +7,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+ body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+/* HEADER FIX */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  background: #e0e0e0;
+  border-radius: 16px;
+  margin: 12px;
+}
+
+.app-header img {
+  width: 40px;
+  height: 40px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* MAIN CONTAINER */
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 10px;
+} 
   <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js');
@@ -107,6 +144,10 @@ h1{margin:8px 0 16px; letter-spacing:1px}
 </head>
 
 <body>
+  <div class="app-header">
+  <img src="icon-192.png" alt="logo">
+  <h1>PRO PREDICTION</h1>
+</div>
  <div class="app-header">
   <img src="icon-192.png" class="app-logo">
   <h1>PRO PREDICTION</h1>
